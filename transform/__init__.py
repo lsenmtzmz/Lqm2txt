@@ -11,7 +11,7 @@ import json
 
 
 def readLqm(filename):
-	path = "./resources/iqm/" + filename
+	path = "./resources/lqm/" + filename
 	
 	with open(path, 'rb') as iqm:
 		rawData = iqm.read().decode('iso-8859-1')
