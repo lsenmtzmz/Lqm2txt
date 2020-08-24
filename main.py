@@ -14,7 +14,8 @@ if __name__ == "__main__":
 	args = parser.parse_args()
 	
 	if args.filename == None:
-		print("No hay argumento filename, se convertiran a formato txt todos los archivos con extension .iqm del directorio ./resources/lqm/")
+		print("No hay argumento filename, se convertiran a formato txt todos los archivos con extension .lqm del directorio ./resources/lqm/")
+		tfm.convertAllLqm2Txt()
 	else:
 		if tfm.validateLqmFormat(args.filename):
 			print("Se convertira el archivo %s en formato txt" % args.filename)
@@ -23,4 +24,4 @@ if __name__ == "__main__":
 			tfm.writeTxtWithStr(fullNote,args.filename)
 		else:
 			print("El formato del archivo %s no es lqm.Intente de nuevo" % args.filename)
-			
+	

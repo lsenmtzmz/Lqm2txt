@@ -6,7 +6,8 @@ Created on Sat Mar 21 18:17:53 2020
 https://stackoverflow.com/questions/56282563/how-to-decode-bytes-object-that-contains-invalid-bytes-python3
 
 """
-import json, datetime
+import os, json, datetime
+
 
 def validateLqmFormat(filename):
 	if filename != None:
@@ -54,5 +55,17 @@ def writeTxtWithStr(string,filename):
 	except Exception as es:
 		print("La escritura del archivo %s fallo: " % filename)
 
+def convertAllLqm2Txt():
+	files = os.listdir("./resources/lqm/")
+	filesLqm = [file for file in files if validateLqmFormat(file)]
+	if filesLqm:
+		print("\nConvirtiendo archivos lqm en txt\n")
+		for file in filesLqm:
+			dataJson = readLqm(file)
+			fullNote = dataPrep2txt(dataJson)
+			writeTxtWithStr(fullNote,file)
+	else:
+		print("No hay archivos con extension lqm en la ruta ./resources/lqm/")
+		
 			
 	
