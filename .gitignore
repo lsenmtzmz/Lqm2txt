@@ -1,0 +1,14 @@
+### Python ###
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.pyc
+
+#Paquetes comprimidos de python
+*.zip
+*.tar.gz
+*.xlsx
+*.csv
+
+# Magic debug
+#magicDebug.py
+Debug/.ipynb_checkpoints/*
