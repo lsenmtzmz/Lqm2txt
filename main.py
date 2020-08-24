@@ -23,5 +23,5 @@ if __name__ == "__main__":
 			fullNote = tfm.dataPrep2txt(dataJson)
 			tfm.writeTxtWithStr(fullNote,args.filename)
 		else:
-			print("El formato del archivo %s no es lqm.Intente de nuevo" % args.filename)
+			print("El formato del archivo %s no es lqm. Intente de nuevo" % args.filename)
 	
