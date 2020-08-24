@@ -5,15 +5,16 @@ Created on Sun Aug 23 20:37:45 2020
 @author: Enrique
 """
 
-import datetime ,json
+import datetime ,json, regex
 
 if __name__ == "__main__":
 
-	with open("./resources/lqm/QuickMemo+_200821_161824(2).lqm", 'rb') as iqm:
+	with open("./resources/lqm/QuickMemo+_200821_161824(4).lqm", 'rb') as iqm:
 		rawData = iqm.read().decode('iso-8859-1')
-	rawData = rawData.split("¦zycu")[0].split("ø")[1].replace("}PK","}").replace("","")
-	rawData = json.loads(rawData)
-	
+		
+	pattern = regex.compile(r'\{(?:[^{}]|(?R))*\}')
+	dataJson = json.loads(pattern.findall(rawData)[0])
+
 	category = rawData["Category"]["CategoryName"]
 	timestamp = rawData["Memo"]["CreatedTime"]/1000 ## Unixtime
 	date = datetime.datetime.fromtimestamp(timestamp).date()

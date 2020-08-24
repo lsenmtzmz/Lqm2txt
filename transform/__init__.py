@@ -6,7 +6,7 @@ Created on Sat Mar 21 18:17:53 2020
 https://stackoverflow.com/questions/56282563/how-to-decode-bytes-object-that-contains-invalid-bytes-python3
 
 """
-import os, json, datetime
+import os, json, datetime, regex
 
 
 def validateLqmFormat(filename):
@@ -19,11 +19,15 @@ def validateLqmFormat(filename):
 			
 def readLqm(filename):
 	path = "./resources/lqm/" + filename
+	try:
+		with open(path, 'rb') as iqm:
+			rawData = iqm.read().decode('iso-8859-1')
+			pattern = regex.compile(r'\{(?:[^{}]|(?R))*\}')
+			dataJson = json.loads(pattern.findall(rawData)[0])
+	except Exception as e:
+		print("[ERROR] No ha sido posible generar el dataJson del archivo ", path)
+		return None 
 	
-	with open(path, 'rb') as iqm:
-		rawData = iqm.read().decode('iso-8859-1')
-		dataJson = json.loads(rawData.split("¦zycu")[0].split("ø")[1].replace("}PK","}").replace("",""))
-		
 	return dataJson
 
 def dataPrep2txt(dataJson):
@@ -39,7 +43,7 @@ def dataPrep2txt(dataJson):
 	else:
 		print("El json esta vacio")
 	
-	return body + "\n\n" + str(date) + " - " +category
+	return(body + "\n\n" + str(date) + " - " +category)
 	
 def writeTxtWithStr(string,filename):
 	try:
