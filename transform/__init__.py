@@ -3,7 +3,6 @@
 Created on Sat Mar 21 18:17:53 2020
 
 @author: Enrique
-https://stackoverflow.com/questions/56282563/how-to-decode-bytes-object-that-contains-invalid-bytes-python3
 
 """
 import os, json, datetime, regex
@@ -48,9 +47,9 @@ def dataPrep2txt(dataJson):
 def writeTxtWithStr(string,filename):
 	try:
 		if validateLqmFormat(filename):
-			path = "./resources/txt/" + filename.split(".")[-1]
+			path = "./resources/txt/" + filename.split(".")[0] + ".txt"
 		else:
-			path = "./resources/txt/" + filename
+			path = "./resources/txt/" + filename + ".txt"
 		
 		fileTxt = open(path, mode="w", encoding="iso-8859-1")
 		fileTxt.write(string)
