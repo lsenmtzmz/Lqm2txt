@@ -13,11 +13,14 @@ if __name__ == "__main__":
 	parser.add_argument('--file', type=str, required=False, dest='filename', help="Poner el nombre del archivo que desea convertir")
 	args = parser.parse_args()
 	
-	
-	if args.filename:
-		print("Se convertira el archivo %s en formato txt" % args.filename)
-		rawData = tfm.readIqm(args.filename)
-		print("Raw Data:\n", rawData)
-		
+	if args.filename == None:
+		print("No hay argumento filename, se convertiran a formato txt todos los archivos con extension .iqm del directorio ./resources/lqm/")
 	else:
-		print("No hay argumento filename, se convertiran a formato txt todos los archivos con extension .iqm del directorio")
+		if tfm.validateLqmFormat(args.filename):
+			print("Se convertira el archivo %s en formato txt" % args.filename)
+			dataJson = tfm.readLqm(args.filename)
+			fullNote = tfm.dataPrep2txt(dataJson)
+			tfm.writeTxtWithStr(fullNote,args.filename)
+		else:
+			print("El formato del archivo %s no es lqm.Intente de nuevo" % args.filename)
+			

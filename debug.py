@@ -20,5 +20,5 @@ if __name__ == "__main__":
 	body = rawData["MemoObjectList"][0]["DescRaw"]
 	
 	text_file = open("./resources/txt/QuickMemo+_200821_161824(2).txt", mode="w", encoding="iso-8859-1")
-	data = text_file.write(body +"\n\n" +category + " - " + str(date))
+	data = text_file.write(body +"\n\n" + category + " - " + str(date))
 	text_file.close()
